@@ -12,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   hostPath:
-    path: "/home/ubuntu/egovframe-common-components-msa-krds/k8s-deploy/data/mysql"
+    path: "/Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/mysql"
     type: DirectoryOrCreate
 
 ---
@@ -50,7 +50,7 @@ data:
   MYSQL_DATABASE: Y29t
 
 ---
-
+# MySQL StatefulSet
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -67,6 +67,11 @@ spec:
       labels:
         app: mysql
     spec:
+      # MySQL 컨테이너에 루트 권한 부여
+      securityContext:
+        fsGroup: 999
+        runAsUser: 999
+        runAsGroup: 999
       containers:
       - name: mysql
         image: mysql:8.0-oracle
@@ -123,10 +128,11 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: data-mysql-0
+          # To use NFS storage, change this to mysql-pvc-nfs
+          claimName: mysql-pvc-nfs
 
 ---
-
+# MySQL Headless Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -140,7 +146,7 @@ spec:
     app: mysql
 
 ---
-
+# MySQL Service
 apiVersion: v1
 kind: Service
 metadata:

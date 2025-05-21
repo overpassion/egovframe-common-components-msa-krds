@@ -455,19 +455,6 @@ spec:
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/instance: prometheus
 ---
-# Add PVC definition
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: prometheus-storage
-  namespace: egov-monitoring
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 20Gi
----
 # Source: prometheus/templates/deploy.yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -558,7 +545,7 @@ spec:
             name: prometheus-rules
         - name: storage-volume
           persistentVolumeClaim:
-            claimName: prometheus-storage
+            claimName: prometheus-pvc-nfs
       terminationGracePeriodSeconds: 300
       affinity:
         podAntiAffinity:

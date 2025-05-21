@@ -1,32 +1,34 @@
+# NFS PersistentVolume
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: redis-pv-0
+  name: redis-pv-nfs
   labels:
-    type: local
+    type: nfs
 spec:
   capacity:
     storage: 1Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   hostPath:
-    path: "/home/ubuntu/egovframe-common-components-msa-krds/k8s-deploy/data/redis"
+    path: "/Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/redis"
     type: DirectoryOrCreate
 
 ---
 
+# NFS PersistentVolumeClaim
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: data-redis-0
+  name: redis-pvc-nfs
   namespace: egov-db
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Gi
+  volumeName: redis-pv-nfs
   storageClassName: standard
-  volumeName: redis-pv-0

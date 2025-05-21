@@ -75,7 +75,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   hostPath:
-    path: "/home/ubuntu/egovframe-common-components-msa-krds/k8s-deploy/data/opensearch"
+    path: "/Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/opensearch"
     type: DirectoryOrCreate
 
 ---
@@ -165,7 +165,11 @@ spec:
           secretName: opensearch-certs
       - name: data
         persistentVolumeClaim:
-          claimName: opensearch-data-0
+          # To use hostPath storage, uncomment this and comment out the NFS claim
+          # claimName: opensearch-pvc-hostpath
+          
+          # Using NFS storage
+          claimName: opensearch-pvc-nfs
 
 ---
 

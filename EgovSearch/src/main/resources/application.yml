@@ -125,7 +125,7 @@ egov:
       size: 5
 
 app:
-  search-config-path: ${APP_SEARCH_CONFIG_PATH:/Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/EgovSearch-config/config/searchConfig.json}
+  search-config-path: ${APP_SEARCH_CONFIG_PATH:/home/ubuntu/egovframe-common-components-msa-krds/EgovSearch-config/config/searchConfig.json}
 
 ---
 spring:

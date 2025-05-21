@@ -162,7 +162,8 @@ services:
 
   mysql-com:
     image: mysql:8.0-oracle
-    platform: linux/arm64/v8
+    #platform: linux/arm64/v8
+    platform: linux/amd64
     container_name: mysql-com
     ports:
       - "${MYSQL_PORT}:${MYSQL_PORT}"
@@ -222,20 +223,20 @@ services:
       gateway-server:
         condition: service_started
 
-  egov-mobileid:
-    image: egovmobileid:${IMAGE_TAG}
-    container_name: egov-mobileid
-    ports:
-      - "${EGOV_MOBILEID_PORT}:${EGOV_MOBILEID_PORT}"
-    environment:
-      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE_DEFAULT}
-      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:${CONFIG_SERVER_PORT}
-      - APP_VERIFY_FILE_PATH=/app/config/verifyConfig-docker.json
-    volumes:
-      - ${EGOVMOBILEID_CONFIG_PATH}:/app/config:ro
-    depends_on:
-      gateway-server:
-        condition: service_started
+#  egov-mobileid:
+#    image: egovmobileid:${IMAGE_TAG}
+#    container_name: egov-mobileid
+#    ports:
+#      - "${EGOV_MOBILEID_PORT}:${EGOV_MOBILEID_PORT}"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE_DEFAULT}
+#      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:${CONFIG_SERVER_PORT}
+#      - APP_VERIFY_FILE_PATH=/app/config/verifyConfig-docker.json
+#    volumes:
+#      - ${EGOVMOBILEID_CONFIG_PATH}:/app/config:ro
+#    depends_on:
+#      gateway-server:
+#        condition: service_started
 
   egov-questionnaire:
     image: egovquestionnaire:${IMAGE_TAG}

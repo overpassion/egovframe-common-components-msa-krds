@@ -24,7 +24,7 @@ spec:
       volumes:
       - name: sonarqube-data
         hostPath:
-          path: /Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/sonarqube
+          path: /mnt/host/c/Users/comgh/egovframe-common-components-msa-krds/k8s-deploy/data/sonarqube
           type: DirectoryOrCreate
 
 ---

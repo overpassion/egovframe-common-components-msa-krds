@@ -51,7 +51,7 @@ spec:
       volumes:
       - name: nexus-data
         hostPath:
-          path: /Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/nexus
+          path: /mnt/host/c/Users/comgh/egovframe-common-components-msa-krds/k8s-deploy/data/nexus
           type: DirectoryOrCreate
       securityContext:
         fsGroup: 200

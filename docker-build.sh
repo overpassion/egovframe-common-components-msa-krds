@@ -21,7 +21,7 @@ services=(
     "EgovHello"
     "EgovLogin"
     "EgovMain"
-    "EgovMobileId"
+#    "EgovMobileId"
     "EgovQuestionnaire"
     "EgovSearch"
 )
@@ -176,7 +176,13 @@ else
     echo -e "Services to build: ${services[@]}\n"
 
     for service in "${services[@]}"; do
-        build_service "$service" "$BUILD_TYPE"
+        if [ "$BUILD_TYPE" != "k8s" ]; then
+            build_service "$service" "$BUILD_TYPE"
+        else
+            if [ "$service" != "ConfigServer" ] && [ "$service" != "EurekaServer" ]; then
+                build_service "$service" "$BUILD_TYPE"
+            fi
+        fi
     done
 fi
 

@@ -84,7 +84,7 @@ spec:
       volumes:
       - name: jenkins-home
         hostPath:
-          path: /Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/jenkins
+          path: /mnt/host/c/Users/comgh/egovframe-common-components-msa-krds/k8s-deploy/data/jenkins
           type: DirectoryOrCreate
 
 ---

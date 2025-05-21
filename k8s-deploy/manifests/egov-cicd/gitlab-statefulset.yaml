@@ -132,26 +132,26 @@ spec:
       volumes:
       - name: gitlab-config
         hostPath:
-          path: /Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/config
+          path: /mnt/host/c/Users/comgh/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/config
           type: DirectoryOrCreate
       - name: gitlab-config-file
         configMap:
           name: gitlab-config
       - name: gitlab-logs
         hostPath:
-          path: /Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/logs
+          path: /mnt/host/c/Users/comgh/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/logs
           type: DirectoryOrCreate
       - name: gitlab-data
         hostPath:
-          path: /Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/data
+          path: /mnt/host/c/Users/comgh/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/data
           type: DirectoryOrCreate
       - name: gitlab-workhorse
         hostPath:
-          path: /Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/workhorse
+          path: /mnt/host/c/Users/comgh/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/workhorse
           type: DirectoryOrCreate
       - name: ssh-host-keys
         hostPath:
-          path: /Users/chrisyoon/Projects/egovframe/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/ssh
+          path: /mnt/host/c/Users/comgh/egovframe-common-components-msa-krds/k8s-deploy/data/gitlab/ssh
           type: DirectoryOrCreate
 
 ---

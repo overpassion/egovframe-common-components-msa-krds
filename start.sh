@@ -92,29 +92,21 @@ start_service() {
     local service_name=$(basename $jar_path .jar)
     local profile=${3:-local}
     
+    # PID를 포함한 로그 파일 경로 생성
+    local log_file="logs/${service_name}_$(date +%s).log"
+    
     # 서비스 시작
-    if [ "$service_name" == "ConfigServer" ]; then
-        echo "Starting $service_name with profile '$profile' and config path..."
-        java -jar $jar_path \
-            --spring.profiles.active=$profile \
-            --spring.cloud.config.server.native.search-locations=file:./ConfigServer-config \
-            > /dev/null 2>&1 &
-    else
-        echo "Starting $service_name with profile '$profile'..."
-        java -jar $jar_path --spring.profiles.active=$profile > /dev/null 2>&1 &
-    fi
+    echo "Starting $service_name with profile '$profile'..."
+    nohup java -jar "$jar_path" --spring.profiles.active="$profile" \
+          > "$log_file" 2>&1 &
     
     # PID 획득
     local pid=$!
-    
-    # PID를 포함한 로그 파일 경로 생성
-    local log_file="logs/${service_name}_${pid}.log"
     
     # 프로세스가 시작되었는지 확인
     sleep 2
     if ps -p $pid > /dev/null; then
         # 로그 리다이렉션 시작
-        tail -f /dev/null | java -jar $jar_path --spring.profiles.active=$profile > "$log_file" 2>&1 &
         echo -e "${GREEN}$service_name started successfully with PID: $pid${NC}"
         echo -e "${GREEN}Log file: $log_file${NC}"
         return 0
